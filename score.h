@@ -4,17 +4,17 @@
 #include<QGraphicsTextItem>
 #include<QFont>
 #include<QDebug>
-#include"Const_Def.h"
+#include"const_def.h"
 
 class Score : public QGraphicsTextItem
 {
 public:
     Score();
-    ~Score(){};
+    int getScore() const {return _score;}
     void increase();
 
 private:
-    int score;
+    int _score;
 };
 
 #endif // SCORE_H

@@ -1,15 +1,20 @@
 #include <QApplication>
-#include "Const_Def.h"
-#include "Game.h"
+#include "const_def.h"
+#include "snakegame.h"
+#include "standardgamescenebuilder.h"
 
 int main(int argc, char *argv[])
 {
     int reboot;
-    do{
-        QApplication *game = new Game(argc, argv);
-        reboot = game->exec();
-        delete game;
-    }while(reboot == const_reboot);
+  //  do{
+
+        StandardGameSceneBuilder builder;
+        QApplication *game = new SnakeGame(argc, argv, builder);
+
+game->exec();
+       // reboot = game->exec();
+        //delete game;
+   // }while(reboot == const_reboot);
 
     return reboot;
 }

@@ -1,7 +1,7 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include "SnakeBit.h"
+#include "snakebit.h"
 #include <QGraphicsRectItem>
 #include <QTimer>
 #include <QDebug>
@@ -13,10 +13,10 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QProcess>
-#include "Mouse.h"
-#include "Score.h"
+#include "mouse.h"
+#include "score.h"
 #include <QMediaPlayer>
-#include"Const_Def.h"
+#include"const_def.h"
 #include <QSharedPointer>
 
 class Snake : public QObject

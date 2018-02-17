@@ -1,4 +1,4 @@
-#include "Snake.h"
+#include "snake.h"
 
 Snake::Snake(QGraphicsScene *scene, Mouse *mouse, Score *score):
     scene(scene),

@@ -1,4 +1,4 @@
-#include "SnakeBit.h"
+#include "snakebit.h"
 
 SnakeBit::SnakeBit(const qreal& x, const qreal& y, const qreal& w, const qreal& h):
     QGraphicsPixmapItem(),

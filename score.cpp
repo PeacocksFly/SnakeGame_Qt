@@ -1,19 +1,14 @@
-#include "Score.h"
+#include "score.h"
 
 Score::Score():
     QGraphicsTextItem(),
-    score(0)
-{
-    //set snake score
-    setPlainText("Mickeys: " + QString::number(score));
-    setDefaultTextColor(Qt::red);
-    setFont(QFont("arial",20));
+    _score(0){
 }
 
+
 //increase score when catching a mouse
-void Score::increase()
-{
-    score++;
-    setPlainText("Mickeys: " + QString::number(score));
+void Score::increase(){
+    _score++;
+    setPlainText("Mickeys: " + QString::number(_score));
 }
 
