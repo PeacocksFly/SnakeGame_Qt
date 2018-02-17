@@ -5,6 +5,7 @@
 #include<QFont>
 #include<QDebug>
 #include"const_def.h"
+#include "gameobject.h"
 
 class Score : public QGraphicsTextItem
 {

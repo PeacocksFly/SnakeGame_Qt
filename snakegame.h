@@ -18,11 +18,12 @@
 
 
 #include "gamescenebuilder.h"
+#include"gamedirector.h"
 
 class SnakeGame :  public QApplication
 {
 public:
-    SnakeGame(int argc, char *argv[], GameSceneBuilder&);
+    SnakeGame(int argc, char *argv[], GameSceneBuilder&, GameDirector*);
     ~SnakeGame();
     QGraphicsScene* createGameScene(GameSceneBuilder& builder);
 

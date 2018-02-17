@@ -5,8 +5,7 @@
 
 class GameSceneBuilder{
 
-public:
-    GameSceneBuilder() = default;
+public:  
 
     virtual void buildScene() = 0;
     virtual void buildView() = 0;
@@ -16,6 +15,9 @@ public:
 
     virtual QGraphicsScene* getScene() = 0;
 
+protected:
+
+    GameSceneBuilder() = default;
 };
 
 

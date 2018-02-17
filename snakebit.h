@@ -6,6 +6,7 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include"const_def.h"
+#include "gameobject.h"
 
 class SnakeBit : public QGraphicsPixmapItem
 {

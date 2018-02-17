@@ -1,9 +1,6 @@
 #include "snake.h"
 
-Snake::Snake(QGraphicsScene *scene, Mouse *mouse, Score *score):
-    scene(scene),
-    mouse(mouse),
-    score(score),
+Snake::Snake():
     timer(new QTimer(this))
 {
    //create head snake object
@@ -14,7 +11,7 @@ Snake::Snake(QGraphicsScene *scene, Mouse *mouse, Score *score):
    snake.front()->setFlag(QGraphicsItem::ItemIsFocusable);
    snake.front()->setFocus();
    //add head snake to the scene
-   scene->addItem(snake.front());
+   scene->addItem(snake.front());  ///!!!
 
    //set timer interval to 1 sec
    timer->setInterval(100);
@@ -71,7 +68,7 @@ void Snake::one_step_move(const qreal& x, const qreal& y, const Qt::Key &movesta
          (snake.front()->x()+x) < 0    ||
          (snake.front()->y()+y) < 0    ||
          (snake.front()->y()+y) >= const_width  ||
-         (mouse->collidesWithSnake(snake, QPointF((snake.front()->x()+x), (snake.front()->y()+y)))))
+         (mouse->collidesWithSnake(snake, QPointF((snake.front()->x()+x), (snake.front()->y()+y))))) ///!!!
     {
         timer->stop();
         int response = QMessageBox::question(nullptr, "Game Over", "Would you like to restart?", QMessageBox::Yes | QMessageBox::No);
@@ -95,7 +92,7 @@ void Snake::one_step_move(const qreal& x, const qreal& y, const Qt::Key &movesta
             if (hitmouse->state() == QMediaPlayer::PlayingState)
             {
                hitmouse->setPosition(0);
-               hitmouse->play();
+               hitmouse->play();    ///!!!
             }
             else
             {
@@ -105,12 +102,12 @@ void Snake::one_step_move(const qreal& x, const qreal& y, const Qt::Key &movesta
             SnakeBit* body = new SnakeBit((snake.front()->x()+x),(snake.front()->y()+y));
             snake.push_front(std::move(body));
             body = nullptr;
-            scene->addItem(snake.front());
-            score->increase();
+            scene->addItem(snake.front());    ///!!!
+            score->increase();                ///!!!
             snake.front()->setFlag(QGraphicsItem::ItemIsFocusable);
             snake.front()->setFocus();
             snake.front()->setMoveStatus(movestatus);
-            mouse->mouse_position_generator(snake);
+            mouse->mouse_position_generator(snake);   ///!!!
         }
     }
     //third case: snake moving

@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <typeinfo>
+#include "gameobject.h"
 
 class Scene: public QGraphicsScene{
 

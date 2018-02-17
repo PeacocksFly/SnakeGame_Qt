@@ -1,6 +1,6 @@
 #include "snakegame.h"
 
-SnakeGame::SnakeGame(int argc, char *argv[], GameSceneBuilder& builder) :
+SnakeGame::SnakeGame(int argc, char *argv[], GameSceneBuilder& builder, GameDirector* gameDirector) :
     QApplication(argc, argv),
     _gameScene(nullptr)
 {

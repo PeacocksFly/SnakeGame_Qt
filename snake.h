@@ -18,6 +18,7 @@
 #include <QMediaPlayer>
 #include"const_def.h"
 #include <QSharedPointer>
+#include "gameobject.h"
 
 class Snake : public QObject
 {
@@ -29,9 +30,6 @@ public:
     void one_step_move(const qreal& x, const qreal& y, const Qt::Key& movestatus);
 
 private:
-    QGraphicsScene* scene;
-    Mouse* mouse;
-    Score* score;
     QTimer* timer;
     std::deque<SnakeBit*> snake;
     QMediaPlayer *hitmouse;

@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <typeinfo>
+#include "gameobject.h"
 
 class View: public QGraphicsView{
 

@@ -8,8 +8,9 @@
 #include<QPointF>
 #include "snakebit.h"
 #include"const_def.h"
+#include "gameobject.h"
 
-class Mouse: public QGraphicsPixmapItem
+class Mouse: public QGraphicsPixmapItem, public GameObject
 {
 public:
     Mouse(const int& x=const_initial_mouse_pos_x,
