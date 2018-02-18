@@ -5,11 +5,16 @@
 #include <QGraphicsScene>
 #include <typeinfo>
 #include "gameobject.h"
+#include "gamedirector.h"
 
-class View: public QGraphicsView{
+class View: public QGraphicsView, public GameObject{
 
 public:
-    View(QGraphicsScene* scene ): QGraphicsView(scene){}
+    View(QGraphicsScene* scene, GameDirector* gameDirector):
+        QGraphicsView(scene),
+        GameObject(gameDirector){
+          gameDirector->attachGameObject(this);
+    }
 
 };
 

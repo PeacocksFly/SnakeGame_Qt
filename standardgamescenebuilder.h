@@ -7,6 +7,7 @@
 #include "view.h"
 #include "score.h"
 #include "mouse.h"
+#include "snake.h"
 
 
 
@@ -15,11 +16,11 @@ class StandardGameSceneBuilder : public GameSceneBuilder{
 public:
     StandardGameSceneBuilder();
 
-    virtual void buildScene();
-    virtual void buildView();
-    virtual void buildScore();
-    virtual void buildMouse();
-    virtual void buildSnake();
+    virtual void buildScene(GameDirector*);
+    virtual void buildView(GameDirector*);
+    virtual void buildScore(GameDirector*);
+    virtual void buildMouse(GameDirector*);
+    virtual void buildSnake(GameDirector*);
 
     virtual QGraphicsScene* getScene();
 

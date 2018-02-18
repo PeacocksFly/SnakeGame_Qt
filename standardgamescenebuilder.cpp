@@ -5,19 +5,19 @@ StandardGameSceneBuilder::StandardGameSceneBuilder():
     _gameScene(nullptr){
 }
 
-void StandardGameSceneBuilder::buildScene(){
+void StandardGameSceneBuilder::buildScene(GameDirector* gameDirector){
 
     if(_gameScene) return;
 
-    _gameScene = new Scene;
+    _gameScene = new Scene(gameDirector);
     _gameScene->setSceneRect(0,0,const_length,const_width);
 }
 
-void StandardGameSceneBuilder::buildView(){
+void StandardGameSceneBuilder::buildView(GameDirector* gameDirector){
 
     if(!_gameScene->views().empty()) return;
 
-    View* view = new View(_gameScene);
+    View* view = new View(_gameScene, gameDirector);
 
     view->setBackgroundBrush(Qt::green);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -27,11 +27,11 @@ void StandardGameSceneBuilder::buildView(){
 }
 
 
-void StandardGameSceneBuilder::buildScore(){
+void StandardGameSceneBuilder::buildScore(GameDirector* gameDirector){
 
     if(dynamic_cast<Scene*>(_gameScene)->isItemPresentInScene<Score>()) return;
 
-    Score* score = new Score;
+    Score* score = new Score(gameDirector);
     //display snake score
     score->setPlainText("Mickeys: " + QString::number(score->getScore()));
     score->setDefaultTextColor(Qt::red);
@@ -39,11 +39,11 @@ void StandardGameSceneBuilder::buildScore(){
     _gameScene->addItem(score);
 }
 
-void StandardGameSceneBuilder::buildMouse(){
+void StandardGameSceneBuilder::buildMouse(GameDirector* gameDirector){
 
     if(dynamic_cast<Scene*>(_gameScene)->isItemPresentInScene<Mouse>()) return;
 
-    Mouse* mouse = new Mouse;
+    Mouse* mouse = new Mouse(gameDirector);
     //position the mouse and attach a picture
     mouse->setPos(mouse->getPos());
     mouse->setPixmap(QPixmap("Images/mouse.jpg").scaled(mouse->getWidth(),mouse->getHeight(),
@@ -52,9 +52,18 @@ void StandardGameSceneBuilder::buildMouse(){
 
 }
 
-void StandardGameSceneBuilder::buildSnake(){
+void StandardGameSceneBuilder::buildSnake(GameDirector* gameDirector){
+
+    if(dynamic_cast<Scene*>(_gameScene)->isItemPresentInScene<Snake>()) return;
 
 
+    Snake* snake = new Snake(gameDirector);
+    snake->setPos(const_initial_head_snake_x,const_initial_head_snake_x);
+    snake->setPixmap(QPixmap("Images/snakehead.png").scaled(const_step_move,const_step_move,Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    snake->setFlag(QGraphicsItem::ItemIsFocusable);
+    snake->setFocus();
+
+    _gameScene->addItem(snake);
 }
 
 

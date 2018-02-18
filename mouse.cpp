@@ -1,14 +1,22 @@
 #include "mouse.h"
 #include "snake.h"
 
-Mouse::Mouse(const int& x, const int& y, const int& w, const int& h):
+Mouse::Mouse(GameDirector* gameDirector, const int& x, const int& y, const int& w, const int& h):
     QGraphicsPixmapItem(),
+    GameObject(gameDirector),
     _xpos(x),
     _ypos(y),
     _width(w),
     _height(h){
+      gameDirector->attachGameObject(this);
+}
+
+
+void Mouse::update(){
+
 
 }
+
 
 void Mouse::mouse_position_generator(const std::deque<SnakeBit*>& snake)
 {
@@ -24,6 +32,10 @@ void Mouse::mouse_position_generator(const std::deque<SnakeBit*>& snake)
 }
 
 
+//create and set music when snake hits the mouse
+//   hitmouse = new QMediaPlayer;
+//   hitmouse->setMedia(QUrl::fromLocalFile("Music/hitmouse.mp3"));
+
 //return true if element position collides with snake
 bool Mouse::collidesWithSnake(const std::deque<SnakeBit*>& snake, const QPointF& pos)
 {
@@ -36,5 +48,7 @@ bool Mouse::collidesWithSnake(const std::deque<SnakeBit*>& snake, const QPointF&
     }
     return false;
 }
+
+
 
 

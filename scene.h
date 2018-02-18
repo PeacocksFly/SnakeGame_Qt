@@ -5,10 +5,17 @@
 #include <typeinfo>
 #include "gameobject.h"
 
-class Scene: public QGraphicsScene{
+class Scene: public QGraphicsScene, public GameObject{
 
 public:
-    Scene():QGraphicsScene() {}
+    Scene(GameDirector* gameDirector):
+        QGraphicsScene(),
+        GameObject(gameDirector)
+
+    {
+         gameDirector->attachGameObject(this);
+
+    }
 
    //check if a specific type of object exists in the scene
    template<typename T> int isItemPresentInScene();

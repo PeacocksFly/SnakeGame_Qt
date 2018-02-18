@@ -1,11 +1,11 @@
 #include "snakegame.h"
 
-SnakeGame::SnakeGame(int argc, char *argv[], GameSceneBuilder& builder, GameDirector* gameDirector) :
+SnakeGame::SnakeGame(int argc, char *argv[], GameSceneBuilder& builder) :
     QApplication(argc, argv),
     _gameScene(nullptr)
 {
-
-    _gameScene = createGameScene(builder);
+    GameDirector* gameDirector = GameDirector::getInstance();
+    _gameScene = createGameScene(builder, gameDirector);
 
     //create, set and play music background object
     musicbg = new QMediaPlayer;
@@ -19,13 +19,13 @@ SnakeGame::SnakeGame(int argc, char *argv[], GameSceneBuilder& builder, GameDire
 
 }
 
-QGraphicsScene* SnakeGame::createGameScene(GameSceneBuilder& builder){
+QGraphicsScene* SnakeGame::createGameScene(GameSceneBuilder& builder, GameDirector* gameDirector){
 
-    builder.buildScene();
-    builder.buildView();
-    builder.buildScore();
-    builder.buildMouse();
-    builder.buildSnake();
+    builder.buildScene(gameDirector);
+    builder.buildView(gameDirector);
+    builder.buildScore(gameDirector);
+    builder.buildMouse(gameDirector);
+    builder.buildSnake(gameDirector);
 
     return builder.getScene();
 }
@@ -35,11 +35,14 @@ QGraphicsScene* SnakeGame::createGameScene(GameSceneBuilder& builder){
 SnakeGame::~SnakeGame()
 {
     //release memory
-    delete snake;
+    //delete snake;
   //  scene->removeItem(mouse);
   //  delete mouse;
     delete musicbg;
  //   delete score;
-    delete view;
+    //delete view;
  //   delete scene;
 }
+
+
+

@@ -10,10 +10,11 @@
 #include"const_def.h"
 #include "gameobject.h"
 
-class Mouse: public QGraphicsPixmapItem, public GameObject
-{
+
+class Mouse: public QGraphicsPixmapItem, public GameObject{
 public:
-    Mouse(const int& x=const_initial_mouse_pos_x,
+    Mouse(GameDirector*,
+          const int& x=const_initial_mouse_pos_x,
           const int& y=const_initial_mouse_pos_y,
           const int& w=const_step_move,
           const int& h=const_step_move);
@@ -21,6 +22,9 @@ public:
     QPointF getPos()const {return QPointF(_xpos, _ypos);}
     int getWidth()  const {return _width;}
     int getHeight() const {return _height;}
+
+    virtual void update();
+
 
     void mouse_position_generator(const std::deque<SnakeBit*>& snake);
     bool collidesWithSnake(const std::deque<SnakeBit*>& snake, const QPointF& pos);

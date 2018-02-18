@@ -6,13 +6,14 @@
 #include<QDebug>
 #include"const_def.h"
 #include "gameobject.h"
+#include "gamedirector.h"
 
-class Score : public QGraphicsTextItem
-{
+
+class Score : public QGraphicsTextItem, public GameObject{
 public:
-    Score();
+    Score(GameDirector*);
     int getScore() const {return _score;}
-    void increase();
+    virtual void update();
 
 private:
     int _score;
