@@ -13,7 +13,7 @@ class Score : public QGraphicsTextItem, public GameObject{
 public:
     Score(GameDirector*);
     int getScore() const {return _score;}
-    virtual void update();
+    virtual void update(QGraphicsItem* bit);
 
 private:
     int _score;

@@ -23,11 +23,10 @@ public:
     int getWidth()  const {return _width;}
     int getHeight() const {return _height;}
 
-    virtual void update();
+    virtual void update(QGraphicsItem* bit);
 
 
-    void mouse_position_generator(const std::deque<SnakeBit*>& snake);
-    bool collidesWithSnake(const std::deque<SnakeBit*>& snake, const QPointF& pos);
+    void mouseReposition();
 
 private:
     int _xpos;

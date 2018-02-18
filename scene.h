@@ -17,6 +17,11 @@ public:
 
     }
 
+   virtual void update(QGraphicsItem* bit){
+          addItem(bit);
+    }
+
+
    //check if a specific type of object exists in the scene
    template<typename T> int isItemPresentInScene();
 

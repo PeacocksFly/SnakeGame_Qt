@@ -22,14 +22,12 @@ Snake::Snake(GameDirector * gameDirector):
 
 Snake::~Snake()
 {
-    //release memory
-    delete _timer;
+ //   delete _timer;
  //   for (unsigned int i=0 ; i < snakeBody.size(); i++)
  //   {
- //      scene->removeItem(snakeBody[i]);
+//         scene->removeItem(snakeBody[i]);
  //      delete snakeBody[i];
 //    }
- //   delete hitmouse;
 
 }
 
@@ -69,8 +67,7 @@ void Snake::oneStepMove(const qreal& x, const qreal& y){
 
          SnakeBit* body = new SnakeBit(currentPos);
          snakeBody.push_front(body);
-         body = nullptr;
-         _gameDirector->notifyMouseSwallow();
+         _gameDirector->notifyMouseSwallow(body);
          return;
     }
 

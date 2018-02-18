@@ -11,7 +11,7 @@ class GameDirector{
 public:
     static GameDirector* getInstance();
     void attachGameObject(GameObject*);
-    void notifyMouseSwallow();
+    void notifyMouseSwallow(QGraphicsItem* bit);
 
 private:
     GameDirector();

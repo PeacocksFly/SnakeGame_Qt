@@ -1,6 +1,8 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <QGraphicsItem>
+
 class GameDirector;
 
 class GameObject{
@@ -8,7 +10,7 @@ class GameObject{
 public:
     GameObject(GameDirector* gameDirector):
           _gameDirector(gameDirector){}
-    virtual void update() {}
+    virtual void update(QGraphicsItem*) {}
 
 protected:
     GameDirector* _gameDirector;

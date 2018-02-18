@@ -9,7 +9,7 @@ Score::Score(GameDirector* gameDirector):
 
 
 //increase score when catching a mouse
-void Score::update(){
+void Score::update(QGraphicsItem* bit){
     _score++;
     setPlainText("Mickeys: " + QString::number(_score));
 }

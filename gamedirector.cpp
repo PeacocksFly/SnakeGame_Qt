@@ -17,10 +17,10 @@ void GameDirector::attachGameObject(GameObject* gameObject){
 }
 
 
-void GameDirector::notifyMouseSwallow(){
+void GameDirector::notifyMouseSwallow(QGraphicsItem* bit){
 
     for(auto it = _listGameObjects.begin(); it!=_listGameObjects.end(); it++)
-             (*it)->update();
+             (*it)->update(bit);
 
     //            scene->addItem(snake.front());    ///!!!
     //            mouse->mouse_position_generator(snake);   ///!!!

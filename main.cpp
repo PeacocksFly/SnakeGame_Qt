@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
 
         StandardGameSceneBuilder builder;
         QApplication *game = new SnakeGame(argc, argv, builder);
-
         game->exec();
         reboot = game->exec();
         delete game;
