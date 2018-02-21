@@ -22,6 +22,12 @@ Snake::Snake(GameDirector * gameDirector):
 
 Snake::~Snake()
 {
+
+    //clean memory
+    //exit game
+    //add mouse music
+    //
+
  //   delete _timer;
  //   for (unsigned int i=0 ; i < snakeBody.size(); i++)
  //   {
