@@ -1,38 +1,54 @@
 #include "mouse.h"
 #include "snake.h"
 
-Mouse::Mouse(GameDirector* gameDirector, const int& x, const int& y, const int& w, const int& h):
+Mouse::Mouse(GameDirector* gameDirector):
     QGraphicsPixmapItem(),
     GameObject(gameDirector),
-    _xpos(x),
-    _ypos(y),
-    _width(w),
-    _height(h){
-      gameDirector->attachGameObject(this);
+    hitmouse(new QMediaPlayer){
+
+      gameDirector->attachGameObject(this);      
+      hitmouse->setMedia(QUrl::fromLocalFile("Music/hitmouse.mp3"));
+}
+
+Mouse::~Mouse(){
+
+     delete hitmouse;
 }
 
 
+//update the position after
 void Mouse::update(QGraphicsItem* bit){
 
+      scream();
       mouseReposition();
-
 }
 
+void Mouse::reset() {
 
-void Mouse::mouseReposition()
-{
+    setPos(const_initial_mouse_pos_x, const_initial_mouse_pos_y);
+}
+
+//check if the new recalculated position is not colling any other scene object
+void Mouse::mouseReposition(){
+
+    int xpos, ypos;
     do{
-        //generate random positions between screen max length and width
-        _xpos = (rand() % const_rand_num_x) * const_step_move;
-        _ypos = (rand() % const_rand_num_y) * const_step_move;
-        setPos(_xpos,_ypos);
+        xpos = (rand() % const_rand_num_x) * const_step_move;
+        ypos = (rand() % const_rand_num_y) * const_step_move;
+        setPos(xpos, ypos);
     }while(!(collidingItems().empty()));
+
 }
 
+void Mouse::scream(){
 
-//create and set music when snake hits the mouse
-//   hitmouse = new QMediaPlayer;
-//   hitmouse->setMedia(QUrl::fromLocalFile("Music/hitmouse.mp3"));
+    if(!hitmouse) return;
+
+    if(hitmouse->state()==QMediaPlayer::PlayingState)
+          hitmouse->setPosition(0);
+    hitmouse->play();
+
+}
 
 
 

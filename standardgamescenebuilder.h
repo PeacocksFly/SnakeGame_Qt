@@ -9,19 +9,15 @@
 #include "mouse.h"
 #include "snake.h"
 
-
-
 class StandardGameSceneBuilder : public GameSceneBuilder{
 
 public:
     StandardGameSceneBuilder();
-
     virtual void buildScene(GameDirector*);
-    virtual void buildView(GameDirector*);
+    virtual void buildView();
     virtual void buildScore(GameDirector*);
     virtual void buildMouse(GameDirector*);
     virtual void buildSnake(GameDirector*);
-
     virtual QGraphicsScene* getScene();
 
 private:

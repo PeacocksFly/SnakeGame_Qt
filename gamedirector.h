@@ -4,14 +4,17 @@
 #include <QGraphicsScene>
 #include "const_def.h"
 #include "gameobject.h"
-#include <QDebug>
+#include <QApplication>
+#include <QMessageBox>
+
 
 class GameDirector{
 
 public:
     static GameDirector* getInstance();
     void attachGameObject(GameObject*);
-    void notifyMouseSwallow(QGraphicsItem* bit);
+    void notifyMouseSwallow(QGraphicsItem*);
+    void notifyGameOver();
 
 private:
     GameDirector();
@@ -19,6 +22,5 @@ private:
     QList<GameObject*> _listGameObjects;
 
 };
-
 
 #endif // GAMEDIRECTOR_H

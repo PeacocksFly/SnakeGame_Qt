@@ -4,42 +4,30 @@ Snake::Snake(GameDirector * gameDirector):
     QGraphicsPixmapItem(),
     GameObject(gameDirector),
     _timer(new QTimer(this)),
-    _moveStatus(Qt::Key_Right)
-{
+    _moveStatus(Qt::Key_Right){
 
     gameDirector->attachGameObject(this);
-   //set timer interval to 1 sec
+
+   //set up and connect a timer for the snake to move
    _timer->setInterval(100);
-
-   //connect the timeout signal from timer to the move function
    connect(_timer, SIGNAL(timeout()), this, SLOT(move()));
-
-   //trigger the timer
    _timer->start();
-
-
 }
 
 Snake::~Snake()
 {
-
-    //clean memory
-    //exit game
-    //add mouse music
-    //
-
- //   delete _timer;
- //   for (unsigned int i=0 ; i < snakeBody.size(); i++)
- //   {
-//         scene->removeItem(snakeBody[i]);
- //      delete snakeBody[i];
-//    }
-
+      delete _timer;
+      if (scene()){
+          for (unsigned int i=0 ; i < snakeBody.size(); i++){
+                   scene()->removeItem(snakeBody[i]);
+                   delete snakeBody[i];
+           }
+      }
 }
 
+//called any timeout signal
 void Snake::move()
 {
-
     //check the movestatus of snake head and give the direction
     if(_moveStatus==Qt::Key_Right){
        oneStepMove(const_step_move, 0);
@@ -58,6 +46,7 @@ void Snake::move()
 
 void Snake::oneStepMove(const qreal& x, const qreal& y){
 
+    //reset the snake position
     QPointF currentPos = QPointF(this->x(), this->y());
     setPos(this->x()+x, this->y()+y);
     if(!snakeBody.empty()) {
@@ -68,24 +57,28 @@ void Snake::oneStepMove(const qreal& x, const qreal& y){
     }
 
 
-   QList<QGraphicsItem *> list = collidingItems();
-   if(isItemCollision<Mouse>(list)){
+    //check if any colliding items
+    QList<QGraphicsItem *> list = collidingItems();
 
-         SnakeBit* body = new SnakeBit(currentPos);
-         snakeBody.push_front(body);
-         _gameDirector->notifyMouseSwallow(body);
-         return;
-    }
+    //if mouse hit game director is notified to update scene objects
+    if(isItemCollision<Mouse>(list)){
 
-    if(isWallCollision() ||  isItemCollision<Snake>(list) ){
+          SnakeBit* body = new SnakeBit(currentPos);
+          snakeBody.push_front(body);
+          if(_gameDirector)
+                 _gameDirector->notifyMouseSwallow(body);
+          return;
+     }
 
-        _timer->stop();
-        quitGame();
-
-    }
+     //game director notification in case of game over
+     if(isWallCollision() ||  isItemCollision<SnakeBit>(list) ){
+         if(_timer)
+             _timer->stop();
+         if(_gameDirector)
+             _gameDirector->notifyGameOver();
+     }
 
 }
-
 
 bool Snake::isWallCollision(){
 
@@ -95,8 +88,6 @@ bool Snake::isWallCollision(){
     return false;
 
 }
-
-
 
 //retrieve key (arrows) and set the movestatus
 void Snake::keyPressEvent(QKeyEvent *event)
@@ -110,9 +101,6 @@ void Snake::keyPressEvent(QKeyEvent *event)
 
 }
 
-
-
-//returns opposite key
 Qt::Key Snake::opposite_key(const Qt::Key& mvtstatus)
 {
     if (mvtstatus== Qt::Key_Right)
@@ -125,17 +113,18 @@ Qt::Key Snake::opposite_key(const Qt::Key& mvtstatus)
          {return Qt::Key_Up;}
 }
 
+void Snake::reset(){
 
-void Snake::quitGame(){
-
-  int response = QMessageBox::question(nullptr, "Game Over", "Would you like to restart?", QMessageBox::Yes | QMessageBox::No);
-
-  if (response == QMessageBox::Yes){
-                qApp->exit(const_reboot);
-   }
-   else if (response == QMessageBox::No){
-                qApp->exit(0);
-   }
+    if (scene()){
+        for (unsigned int i=0 ; i < snakeBody.size(); i++){
+                 scene()->removeItem(snakeBody[i]);
+                 if (snakeBody[i])
+                    delete snakeBody[i];
+         }
+    }
+    snakeBody.clear();
+    _moveStatus = Qt::Key_Right;
+    setPos(const_initial_head_snake_x,const_initial_head_snake_x);
+    if(_timer) _timer->start();
 }
-
 

@@ -4,12 +4,11 @@
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
 #include <QKeyEvent>
-#include <QDebug>
 #include"const_def.h"
 
 
-class SnakeBit : public QGraphicsPixmapItem
-{
+class SnakeBit : public QGraphicsPixmapItem{
+
 public:
     SnakeBit(const QPointF&,
              const qreal& w=const_step_move,

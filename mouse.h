@@ -3,35 +3,24 @@
 
 #include<QGraphicsPixmapItem>
 #include<cstdlib>
-#include<QDebug>
-#include<deque>
-#include<QPointF>
-#include "snakebit.h"
 #include"const_def.h"
 #include "gameobject.h"
+#include <QMediaPlayer>
 
 
 class Mouse: public QGraphicsPixmapItem, public GameObject{
+
 public:
-    Mouse(GameDirector*,
-          const int& x=const_initial_mouse_pos_x,
-          const int& y=const_initial_mouse_pos_y,
-          const int& w=const_step_move,
-          const int& h=const_step_move);
-
-    QPointF getPos()const {return QPointF(_xpos, _ypos);}
-    int getWidth()  const {return _width;}
-    int getHeight() const {return _height;}
-
+    Mouse(GameDirector*);
+    ~Mouse();
     virtual void update(QGraphicsItem* bit);
+    virtual void reset();
 
-
-    void mouseReposition();
 
 private:
-    int _xpos;
-    int _ypos;
-    int _width;
-    int _height;
+    QMediaPlayer *hitmouse;
+    void scream();
+    void mouseReposition();
+
 };
 #endif // MOUSE_H

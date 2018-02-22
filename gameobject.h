@@ -11,6 +11,7 @@ public:
     GameObject(GameDirector* gameDirector):
           _gameDirector(gameDirector){}
     virtual void update(QGraphicsItem*) {}
+    virtual void reset() {}
 
 protected:
     GameDirector* _gameDirector;

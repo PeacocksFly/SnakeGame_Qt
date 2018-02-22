@@ -14,3 +14,10 @@ void Score::update(QGraphicsItem* bit){
     setPlainText("Mickeys: " + QString::number(_score));
 }
 
+//reset score to zero after game over
+void Score::reset(){
+    _score = 0;
+    setPlainText("Mickeys: " + QString::number(_score));
+}
+
+
